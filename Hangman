@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+
+	background-color:salmon; 
+
+}
+
+#title {
+
+	text-align:center;
+    text-weight:bold;
+    font-size:32px;
+    text-decoration:underline;
+    top:10%;
+
+}
+
+#getGuess {
+
+	text-align:center;
+
+}
+
+#theWord {
+
+	text-align:center;
+    font-weight:bold;
+    font-size:30px;
+    top:40%;
+
+}
+
+#container {
+  position:relative;
+  top:50%;
+  left:25%;
+
+}
+
+#theError {
+
+	  color:red;
+    font-size:40px;
+    text-align:center;
+    margin-top:70px;
+
+}
+
+#checkButton {
+
+	margin-left:6px;
+
+}
+
+</style>
+</head>
+<body>
+<p id = "title">Hangman</p>
+
+<p id = "theWord"><p>
+
+<div id = "container">
+  
+<label>
+Enter your guess here ->   
+</label>
+<input id = "getGuess" type="input" placeholder="Guess">
+<input id="checkButton" type="button" onClick="check()" value="Guess">
+  
+</div>
+
+
+
+<p id = "theError"><p>
+<script>
+var word = "H___O";
+
+var flag = 0;
+
+var errCount = 0;
+
+document.getElementById("theWord").innerHTML = word;
+
+function replaceAt(string, index, replace) {
+  return string.substring(0, index) + replace + string.substring(index + 1);
+}
+
+function check(){
+  
+  var correctWord = "HELLO"
+  var guessLetter = document.getElementById("getGuess").value;
+  var lengthOfWord = correctWord.length;
+  
+  for(i=0;i<lengthOfWord;i++){
+    
+    if(guessLetter == correctWord[i]){
+      
+      var temp = document.getElementById("theWord").innerHTML;
+      var changed = replaceAt(temp,i,guessLetter);
+      document.getElementById("theWord").innerHTML = changed;
+      flag = 1;
+      if(changed == correctWord){
+        alert("YOU WIN");
+      }
+      }
+  }
+  if(flag == 0){
+        if(errCount < 3){
+              var testing = document.getElementById("theError").innerHTML;
+              document.getElementById("theError").innerHTML = testing + " X ";
+              if(errCount == 2){
+                alert("GAME OVER");
+              }
+              errCount++;
+  }
+}
+  flag = 0;
+}
+</script>
+</body>
+</html>
+
